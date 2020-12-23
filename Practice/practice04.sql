@@ -233,6 +233,61 @@ and emp.salary > avgsal.salary;
 
 
 
+-- 문제8.
+-- 직원 입사일이 11번째에서 15번째의 직원의 사번, 이름, 급여, 입사일을 입사일 순서로 출력하세요
+-- 1. 직원 사번, 이름, 급여, 입사일을 입사일 순서로 조회
+select  employee_id,
+        first_name,
+        salary,
+        hire_date
+from employees
+order by hire_date asc;
+-- 2. rownum으로 순서대로 조회
+select  rownum,
+        employee_id,
+        first_name,
+        salary,
+        hire_date
+from (select  employee_id,
+              first_name,
+              salary,
+              hire_date
+      from employees
+      order by hire_date asc) o;
+-- 3. 최종 조회
+-- 직원 입사일이 11번째에서 15번째의 직원의 사번, 이름, 급여, 입사일을 입사일 순서로 출력하세요
+select  rm,
+        employee_id,
+        first_name,
+        salary,
+        hire_date
+from (select  rownum as rm,
+              o.employee_id,
+              o.first_name,
+              o.salary,
+              o.hire_date
+      from (select  employee_id,
+                    first_name,
+                    salary,
+                    hire_date
+            from employees
+            order by hire_date asc) o
+      ) orow
+where rm >= 11
+and rm <= 15;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
