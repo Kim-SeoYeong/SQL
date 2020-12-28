@@ -1,3 +1,9 @@
+-- 혹시 모르니 미리 drop을 실행해준 후 작업함
+drop table book;
+drop table author;
+drop sequence seq_book_id;
+drop sequence seq_author_id;
+
 -- author 테이블 생성
 create table author(
     author_id number(10),       --primary key 기본키
@@ -83,6 +89,9 @@ values (seq_book_id.nextval, '26년', '재미주의', '2012-02-04', 5);
 select *
 from book;
 
+-- 최종 commit을 해주자
+commit;
+
 -- 예제(강풀 정보 변경)
 -- 1. 강풀의 author_desc 정보를 '서울특별시'로 변경해 보세요
 update author
@@ -117,8 +126,6 @@ select  book.book_id,
 from author, book
 where author.author_id = book.author_id;
 
--- 최종 commit을 해주자
-commit;
 
 
 
